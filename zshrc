@@ -1,4 +1,4 @@
-ZSHA_BASE=$HOME/.antigen
+ZSHA_BASE=$HOME/zshetup
 
 source $(dirname $(gem which colorls))/tab_complete.sh
 alias -g uls='/usr/local/src'
