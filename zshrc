@@ -205,7 +205,10 @@ if [ $ZHOSTN = "Darwin" ]; then
 	ZB_OS=$ZI_MAC
 elif [ $ZHOSTN = "Linux" ]; then
 	ZB_OS=$ZI_LIN
-	if [ $(uname -r | grep Microsoft) ]; then ZB_OS+=$ZI_WIN; fi
+	if [ $(uname -r | grep Microsoft) ]; then 
+		ZB_OS+=$ZI_WIN;
+		eval $(/mnt/d/Tools/ssh-agent-wsl/ssh-agent-wsl -r)
+	fi
 	ZISSUE=$(< /etc/issue)
 	if [[ $ZISSUE == *"Debian"* ]]; then
 		ZB_OS=$ZI_DEB
