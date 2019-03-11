@@ -1,6 +1,6 @@
-<h1 align="center">
+<h2>
     Singletail's zsh configuration
-</h1>
+</h2>
 
 <p>This is for me to move to new machines and get set up quickly. But if it works for you, enjoy.</p>
 
@@ -12,15 +12,15 @@
 </p>
 <p>
 	<b>Ruby Prereq:</b><br/>
-	apt-get ruby ruby-dev<br/>
+	apt-get install ruby ruby-dev<br/>
 	gem install colorls<br/>
 </p>
 <p>
-
     <b>Install:</b><br/>
 	cd ~<br/>
 	git clone --recurse-submodules https://github.com/singletail/zshetup.git<br/>
 	ln -s zshetup/zshrc .zshrc<br/>
 	zsh<br/>
 </p>
+
 
