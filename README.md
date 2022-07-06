@@ -11,14 +11,9 @@
 	Windows: https://github.com/haasosaurus/nerd-fonts/tree/regen-mono-font-fix<br/>
 </p>
 <p>
-	<b>Ruby Prereq:</b><br/>
-	apt-get install ruby ruby-dev<br/>
-	gem install colorls<br/>
-</p>
-<p>
     <b>Install:</b><br/>
 	cd ~<br/>
-	git clone --recurse-submodules https://github.com/singletail/zshetup.git<br/>
+	git clone https://github.com/singletail/zshetup.git<br/>
 	ln -s zshetup/zshrc .zshrc<br/>
 	zsh<br/>
 </p>
