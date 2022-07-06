@@ -14,8 +14,8 @@
     <b>Install:</b><br/>
 	cd ~<br/>
 	git clone https://github.com/singletail/zshetup.git<br/>
-	ln -s zshetup/zshrc .zshrc<br/>
-	zsh<br/>
+	ln -s zshetup/.zshrc .zshrc<br/>
+	exec zsh<br/>
 </p>
 
 
