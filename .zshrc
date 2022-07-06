@@ -16,7 +16,6 @@ plugins=(
   hlissner/zsh-autopair
   djui/alias-tips
   peterhurford/up.zsh
-  #sindresorhus/pure
   zsh-users/zsh-syntax-highlighting
 )
 
@@ -46,7 +45,7 @@ function load-files () {
             mkdir -p $dir_name
         fi
         if [[ ! -f $dir_name/$file_name ]]; then
-		    echo "--------- Downloading $url..."
+		    echo "Downloading $url..."
             curl -sSL $url -o $dir_name/$file_name
         fi
 
@@ -65,6 +64,8 @@ promptinit
 
 setopt histignorealldups sharehistory
 
+ZSH_DISABLE_COMPFIX=true
+
 autoload -U compinit
 compinit
 
@@ -73,7 +74,6 @@ zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
-eval "$(dircolors -b)"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
@@ -96,7 +96,6 @@ load-files $files
 
 ### Fzf
 
-echo "---------- Setting up FZF"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || rg --files --hidden --follow --glob '!.git' || find ."
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -105,37 +104,31 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap 
 export FZF_ALT_C_OPTS="--preview 'tree -NC {} | head -200'"
 
 ### Alias
-alias ls="ls --color"
+# alias ls="ls --color"
 alias python="python3"
 
-# Prettify ls
-#if (( $+commands[gls] )); then
-#    alias ls='gls --color=tty --group-directories-first'
-#fi
-
-# Modern Unix Tools
-# See https://github.com/ibraheemdev/modern-unix
-#alias diff="delta"
-#alias find="fd"
-#alias grep="rg"
-
+## Bat
 # MacOS: brew install bat
 # Deb: wget https://github.com/sharkdp/bat/releases/download/v0.21.0/bat_0.21.0_amd64.deb
 # Debian: sudo dpkg -i bat_0.21.0_amd64.deb
 alias cat="bat"
 
+## Exa
+## Deb: apt install exa
+## MacOS: brew install exa
+alias ls="exa --icons"
+
+## Glances
+## pip install --user glances
+alias top="glances"
+
 ### VCS 
 
 autoload -Uz vcs_info
 precmd() { vcs_info }
-# zstyle ':vcs_info:git:*' formats '%b '
-# zstyle ':vcs_info:git*' actionformats "%s  %r/%S %b %m%u%c "
-# 
 zstyle ':vcs_info:*' check-for-changes true
-# Set custom strings for an unstaged vcs repo changes (*) and staged changes (+)
 zstyle ':vcs_info:*' unstagedstr '-'
 zstyle ':vcs_info:*' stagedstr '-'
-# Set the format of the Git information for vcs_info
 zstyle ':vcs_info:git:*' formats       ' [-%b%u%c]'
 zstyle ':vcs_info:git:*' actionformats ' [-%b|%a%u%c]'
 
@@ -161,7 +154,6 @@ zstyle ':vcs_info:git:*' actionformats ' [-%b|%a%u%c]'
 
 # time/host/dir/vcs
 # nonroot= blue-violet-pink-cyan
-echo "---------- Setting up Prompt"
 setopt PROMPT_SUBST
 
 # Start
@@ -201,4 +193,4 @@ setopt PROMPT_SUBST
 PROMPT='%(!.%F{196}.%F{19})%f%(!.%K{196}.%K{19})%F{255}%T%f%(!.%F{196}%K{160}.%F{19}%K{55})%f%F{255}%n%k%f%(!.%F{160}%K{124}.%F{55}%K{126})%f%F{255}%m%k%f%(!.%F{124}%K{88}.%F{126}%K{32})%f%F{255}%~%k%f%(!.%F{88}.%F{32})%f%F{190}$B${vcs_info_msg_0_}%f '
 
 ### Local customizations, e.g. theme, plugins, aliases, etc.
-# [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
+[ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
